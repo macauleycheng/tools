@@ -3,18 +3,25 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import java.util.LinkedList;
 
-//import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Peripheral {
 
     LinkedList<String> storeJson = new LinkedList<String>();
    
     public void genJson() {
-    	System.out.println(storeJson.toString());
-        /*jsonNodeString jNode = objectMapper.readTree(jsonNodeString);
-        System.out.println(jNode.toString());*/	       	
+    	//System.out.println(storeJson.toString().replace("[", "{").replace("]", "}"));
+	    ObjectMapper mapper = new ObjectMapper();
+	    try {
+	        JsonNode actualObj = mapper.readTree(storeJson.toString().replace("[", "{").replace("]", "}"));   
+	        System.out.println(actualObj.toString()); 	
+	    } catch (IOException ioe) {
+
+	    }
     }
 
     public void parsing() {
